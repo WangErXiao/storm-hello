@@ -6,6 +6,9 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
 import backtype.storm.tuple.Tuple;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,8 +28,13 @@ public class WordCounter extends BaseBasicBolt {
     @Override
     public void cleanup() {
         System.out.println("-- Word Counter ["+name+"-"+id+"] --");
-        for(Map.Entry<String, Integer> entry : counters.entrySet()){
-            System.out.println(entry.getKey()+": "+entry.getValue());
+        try(FileWriter fileWriter=new FileWriter(new File("/home/yao/tmp/storm/result.txt"))){
+            for(Map.Entry<String, Integer> entry : counters.entrySet()){
+                System.out.println(entry.getKey()+": "+entry.getValue());
+                fileWriter.write(entry.getKey()+": "+entry.getValue());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
