@@ -19,6 +19,13 @@
             <artifactId>kryo</artifactId>
             <version>2.24.0</version>
         </dependency>
+
+        <!--MQ-->
+        <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>3.2.5</version>
+        </dependency>
     </dependencies>
     <repositories>
         <!-- Repository where we can found the storm dependencies -->
