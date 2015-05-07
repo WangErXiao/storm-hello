@@ -15,6 +15,17 @@ public class EventModel implements Serializable{
     private Date date;
     private SourceType sourceType;
 
+    public EventModel() {
+
+    }
+
+    public EventModel(String id, EventType eventType, Date date, SourceType sourceType) {
+        this.id = id;
+        this.eventType = eventType;
+        this.date = date;
+        this.sourceType = sourceType;
+    }
+
     public String getId() {
         return id;
     }

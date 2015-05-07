@@ -8,6 +8,7 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.yao.mq.consumer.MyMQConsumer;
+import com.yao.mq.utils.CONSTANTS;
 
 import java.util.List;
 import java.util.Map;
@@ -16,9 +17,12 @@ import java.util.Map;
  * Created by yao on 15/5/6.
  */
 public class PullMessageSpout extends BaseRichSpout {
-
     private SpoutOutputCollector collector;
     private MyMQConsumer myMQConsumer;
+
+    public PullMessageSpout() {
+        super();
+    }
 
 
     @Override
@@ -30,10 +34,11 @@ public class PullMessageSpout extends BaseRichSpout {
     public void open(Map map, TopologyContext topologyContext, SpoutOutputCollector spoutOutputCollector) {
         collector=spoutOutputCollector;
         try {
-            myMQConsumer=new MyMQConsumer();
+            myMQConsumer=new MyMQConsumer("groupName"+Thread.currentThread().getId());
         } catch (MQClientException e) {
             e.printStackTrace();
         }
+        System.out.println(myMQConsumer);
     }
 
     @Override
